@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+.nav-menu {
+  font-family: "PT Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 19.41px;
+  text-align: center;
+}
+
+.hamburger-menu {
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #3f4e4f;
+  margin: 5px auto;
+  transition: transform 0.3s ease;
+}
+
+.bar:nth-child(1) {
+  transform: translateY(0) rotate(0deg);
+}
+
+.bar:nth-child(2) {
+  transform: translateY(0) rotate(0deg);
+}
+
+.bar:nth-child(3) {
+  transform: translateY(0) rotate(0deg);
+}
+
+.hamburger-menu.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 780px) {
+  .mobile-nav {
+    height: 10vh;
+    /* transition: background-color 0.3s ease; */
+  }
+
+  .mobile-nav .text-center {
+    padding: 1rem 0;
+  }
+
+  .mobile-nav .nav-menu {
+    font-size: 0.8rem;
+  }
+
+  .mobile-nav .text-center img {
+    width: 115px;
+    margin-top: -1rem;
+  }
+
+  .mobile-nav .hamburger-menu {
+    margin-top: -1.2rem;
+  }
+}

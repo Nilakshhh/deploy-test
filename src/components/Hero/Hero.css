@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+.hero-container {
+  width: calc(84%);
+  height: 100vh;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1032px) {
+  .hero-container {
+    width: 100%;
+  }
+}
+
+.hero-text {
+  font-family: "Playfair Display", serif;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 66.65px;
+  text-align: center;
+}
+
+.address-text {
+  font-family: "PT Sans", sans-serif;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 32.35px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-appointment,
+.btn-contact {
+  font-family: "PT Sans", sans-serif;
+  width: fit-content;
+  padding: 10px 24px;
+  margin: 0 10px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (max-width: 680px) {
+  .btn-appointment,
+  .btn-contact {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .hero-text {
+    font-family: "Playfair Display", serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 66.65px;
+    text-align: center;
+  }
+}
+
+.btn-appointment {
+  background-color: #e7d8b2;
+  color: #3f4e4f;
+}
+
+.btn-contact {
+  background-color: #3f4e4f;
+  color: #ffffff;
+}
+
+@media (max-width: 780px) {
+  .button-container {
+    flex-direction: column;
+  }
+
+  .btn-appointment,
+  .btn-contact {
+    margin: 10px 0;
+  }
+}

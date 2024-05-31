@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+.team-container {
+  width: calc(80%);
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+@media (max-width: 1032px) {
+  .team-container {
+    width: 100%;
+  }
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 35px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 46.66px;
+  text-align: left;
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  .section-title {
+    font-size: 25px;
+    line-height: 33.35px;
+  }
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 100px;
+  justify-items: center;
+}

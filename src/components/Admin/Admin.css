@@ -1,0 +1,25 @@
+.AdminTabs {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+.tabs button.active {
+    background-color: #6200ea;
+    color: white;
+}
+
+

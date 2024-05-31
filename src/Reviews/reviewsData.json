@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Estela Radan",
+    "date": "April 15, 2024",
+    "review": "Joao gave me a wonderful haircut. He listened to what I wanted and offered his take and then gave me a great cut! Claudia shampooed my hair and it was so relaxing. Great experience and I will be back!",
+    "rating": 4.5
+  },
+  {
+    "name": "John Doe",
+    "date": "April 16, 2024",
+    "review": "I had an amazing experience at Tresses Salon DC. The staff was friendly and professional. The haircut I received was exactly what I wanted. Highly recommend!",
+    "rating": 5
+  },
+  {
+    "name": "Jane Smith",
+    "date": "April 17, 2024",
+    "review": "Fantastic service! The stylists are skilled and attentive. I was very happy with my haircut and will definitely be returning for future appointments.",
+    "rating": 4
+  }
+]
