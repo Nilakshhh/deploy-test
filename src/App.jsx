@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
@@ -18,20 +18,20 @@ function App() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [products, setProducts] = useState([]);
 
-useEffect(() => {
-  fetchProducts();
-});
+  useEffect(() => {
+    fetchProducts();
+  });
 
-const fetchProducts = async () => {
-  try {
-    console.log(apiUrl);
-    var url = apiUrl + "/admins/product";
-    const response = await axios.get(url);
-    setProducts(response.data);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-};
+  const fetchProducts = async () => {
+    try {
+      console.log(apiUrl);
+      var url = apiUrl + "/admins/product";
+      const response = await axios.get(url);
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
   return (
     <Router>
       <div className="app-container">
