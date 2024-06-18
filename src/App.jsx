@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  });
 
   const fetchProducts = async () => {
     try {
@@ -44,11 +44,11 @@ function App() {
                 <Hero />
                 <Services />
                 <Products products={products} />
-                <About />
                 <Reviews />
                 <Team />
                 <Contact />
                 <PostReview />
+                <About />
               </>
             }
           />

@@ -17,7 +17,7 @@ function Reviews() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        var url = apiUrl + "/users/view_reviews"
+        const url = apiUrl + "/users/view_reviews";
         const response = await axios.get(url);
         setReviewsData(response.data);
       } catch (error) {
@@ -25,7 +25,7 @@ function Reviews() {
       }
     }
     fetchReviews();
-  });
+  }, [apiUrl]);
 
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false })
@@ -34,10 +34,15 @@ function Reviews() {
   return (
     <div className="reviews-container" id="reviews">
       <h2 className="section-title">Reviews</h2>
-      <Carousel plugins={[plugin.current]} className="w-full">
-        <CarouselContent>
+      <Carousel
+        align="center"
+        plugins={[plugin.current]}
+        className="w-full"
+        options={{ loop: true, containScroll: "trimSnaps" }}
+      >
+        <CarouselContent className="carousel-content">
           {reviewsData.map((review, index) => (
-            <CarouselItem key={index}>
+            <CarouselItem key={index} className="carousel-item">
               <ReviewCard
                 name={review.title}
                 date={format(new Date(review.reviewDate), "MMMM dd, yyyy")}

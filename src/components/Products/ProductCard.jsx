@@ -35,7 +35,8 @@ const ProductCard = ({ product }) => {
   //   }, [emblaApi]);
 
   return (
-    <Card className="product-card">
+    // <Card className="product-card">
+    <div>
       <CardHeader>
         <div className="embla">
           <div className="embla__viewport" ref={emblaRef}>
@@ -43,7 +44,11 @@ const ProductCard = ({ product }) => {
               {product.media.map((media, index) => (
                 <div className="embla__slide embla__class-names" key={index}>
                   {media.endsWith(".mp4") ? (
-                    <video className="embla__slide__img" src={`http://localhost:5000/${media}`} controls />
+                    <video
+                      className="embla__slide__img"
+                      src={`http://localhost:5000/${media}`}
+                      controls
+                    />
                   ) : (
                     <img
                       className="embla__slide__img"
@@ -89,7 +94,8 @@ const ProductCard = ({ product }) => {
           <p className="product-cost">${product.cost}</p>
         </div>
       </CardContent>
-    </Card>
+    </div>
+    // </Card>
   );
 };
 

@@ -27,7 +27,7 @@ function Hero() {
         >
           BOOK AN APPOINTMENT
         </a>
-        <button className="btn-contact" onClick={scrollToContact}>
+        <button className="btn-contactus" onClick={scrollToContact}>
           CONTACT US
         </button>
       </div>

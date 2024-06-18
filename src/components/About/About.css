@@ -1,13 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
-
 .about-container {
   width: calc(80%);
   float: right;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  /* padding: 5px; */
 }
 
 @media (max-width: 1032px) {
@@ -16,11 +15,32 @@
   }
 }
 
-.table-container {
+.timings-container {
   display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
+}
+
+.timing-item {
+  margin-bottom: 10px;
+  font-family: "PT Sans", sans-serif;
+}
+
+.day {
+  font-weight: bold;
+}
+
+.table-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media (min-width: 1032px) {
+  .map-container {
+    margin-left: -45px;
+    width: 104%;
+  }
 }
 
 @media (max-width: 780px) {

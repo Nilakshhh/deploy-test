@@ -40,7 +40,7 @@
 }
 
 .btn-appointment,
-.btn-contact {
+.btn-contactus {
   font-family: "PT Sans", sans-serif;
   width: fit-content;
   padding: 10px 24px;
@@ -54,7 +54,7 @@
 
 @media (max-width: 680px) {
   .btn-appointment,
-  .btn-contact {
+  .btn-contactus {
     padding: 10px 20px;
     font-size: 14px;
   }
@@ -73,7 +73,7 @@
   color: #3f4e4f;
 }
 
-.btn-contact {
+.btn-contactus {
   background-color: #3f4e4f;
   color: #ffffff;
 }
@@ -84,7 +84,7 @@
   }
 
   .btn-appointment,
-  .btn-contact {
+  .btn-contactus {
     margin: 10px 0;
   }
 }

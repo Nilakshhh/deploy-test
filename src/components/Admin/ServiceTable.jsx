@@ -17,7 +17,7 @@ const ServiceTable = () => {
 
   useEffect(() => {
     fetchServices();
-  }, []);
+  });
 
   const fetchServices = async () => {
     var url = apiUrl + "/admins/service";
@@ -66,6 +66,19 @@ const ServiceTable = () => {
         console.error("Error updating service:", error);
       });
   };
+
+  useEffect(() => {
+    var url = apiUrl + "/admins/service";
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response.data);
+        setServices(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the services!", error);
+      });
+  });
 
   const handleDelete = (id) => {
     const userConfirmed = window.confirm(
@@ -198,7 +211,7 @@ const ServiceTable = () => {
                 <div className="input-group">
                   <label>Cost</label>
                   <input
-                    type="number"
+                    type="text"
                     name="cost"
                     value={editedService.cost}
                     onChange={handleInputChange}

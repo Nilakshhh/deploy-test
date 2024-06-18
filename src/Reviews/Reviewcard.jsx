@@ -5,8 +5,8 @@ import "./ReviewCard.css";
 
 function ReviewCard({ name, date, review, rating }) {
   return (
-    <div className="">
-      <Card className="card-container">
+    <div className="card-container">
+      <Card className="card-content">
         <div className="flex flex-col items-center">
           <div className="flex items-center">
             <CardTitle className="review-name pl-4 pt-4">{name}</CardTitle>

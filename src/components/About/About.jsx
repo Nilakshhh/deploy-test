@@ -1,12 +1,4 @@
 import "./About.css";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 const timings = [
   { Day: "Sunday", Timing: "Closed" },
@@ -22,23 +14,15 @@ function About() {
   return (
     <div className="about-container" id="about">
       <h2 className="section-title">About Us</h2>
-      <div className="table-container">
-        <Table className="table-text max-w-[100vh]">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Day</TableHead>
-              <TableHead className="text-right">Timings</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {timings.map((timing) => (
-              <TableRow key={timing.timing}>
-                <TableCell className="font-medium">{timing.Day}</TableCell>
-                <TableCell className="text-right">{timing.Timing}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="timings-container">
+        {timings.map(({ Day, Timing }) => (
+          <p key={Day} className="timing-item">
+            <span className="day">{Day}</span> |{" "}
+            <span className="timing">{Timing}</span>
+          </p>
+        ))}
+      </div>
+      <div className="map-container">
         <iframe
           width="100%"
           height="400"
