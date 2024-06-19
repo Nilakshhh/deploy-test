@@ -6,7 +6,7 @@ import "./ServiceTable.css"; // Import CSS file for styling
 const ServiceTable = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [services, setServices] = useState([]);
-  const [, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [editedService, setEditedService] = useState({
     title: "",
@@ -17,18 +17,15 @@ const ServiceTable = () => {
 
   useEffect(() => {
     fetchServices();
-  });
+  }, []); // Run only once on component mount
 
   const fetchServices = async () => {
-    var url = apiUrl + "/admins/service";
-    axios
-      .get(url)
-      .then((response) => {
-        setServices(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the services!", error);
-      });
+    try {
+      const response = await axios.get(`${apiUrl}/admins/service`);
+      setServices(response.data);
+    } catch (error) {
+      console.error("There was an error fetching the services!", error);
+    }
   };
 
   const handleEdit = (id) => {
@@ -48,66 +45,41 @@ const ServiceTable = () => {
     setShowModal(false);
   };
 
-  const updateService = () => {
-    var url = apiUrl + "/admins/service";
-    axios
-      .put(url, {
+  const updateService = async (event) => {
+    event.preventDefault(); // Prevent form submission
+    try {
+      const response = await axios.put(`${apiUrl}/admins/service`, {
         id: currentService._id,
-        title: editedService.title,
-        description: editedService.description,
-        cost: editedService.cost,
-        link: editedService.link,
-      })
-      .then((response) => {
-        console.log("Service updated successfully:", response.data);
-        closeModal(); // Close modal after successful update
-      })
-      .catch((error) => {
-        console.error("Error updating service:", error);
+        ...editedService,
       });
+      console.log("Service updated successfully:", response.data);
+      setServices((prevServices) =>
+        prevServices.map((service) =>
+          service._id === currentService._id ? response.data : service
+        )
+      );
+      closeModal(); // Close modal after successful update
+    } catch (error) {
+      console.error("Error updating service:", error);
+    }
   };
 
-  useEffect(() => {
-    var url = apiUrl + "/admins/service";
-    axios
-      .get(url)
-      .then((response) => {
-        console.log(response.data);
-        setServices(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the services!", error);
-      });
-  });
-
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const userConfirmed = window.confirm(
       "Are you sure you want to delete this service?"
     );
 
     if (userConfirmed) {
-      console.log(`Delete service with id: ${id}`);
-
-      // Example delete request using fetch API
-      var url = apiUrl + `/admins/service/${id}`;
-      fetch(url, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Service deleted successfully", data);
-          // Optionally, update the UI to reflect the deletion
-        })
-        .catch((error) => {
-          console.error("There was a problem with the delete request:", error);
-        });
+      try {
+        const response = await axios.delete(`${apiUrl}/admins/service/${id}`);
+        console.log("Service deleted successfully", response.data);
+        setServices((prevServices) =>
+          prevServices.filter((service) => service._id !== id)
+        );
+      } catch (error) {
+        console.error("There was a problem with the delete request:", error);
+      }
     } else {
-      // User cancelled, do nothing
       console.log("Delete action cancelled by user");
     }
   };
@@ -118,7 +90,6 @@ const ServiceTable = () => {
       ...prevState,
       [name]: value,
     }));
-    console.log(editedService);
   };
 
   return (
@@ -150,12 +121,7 @@ const ServiceTable = () => {
                 {service.cost}
               </td>
               <td className="border px-4 py-2" data-label="Link">
-                {" "}
-                <a
-                  href={service.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={service.link} target="_blank" rel="noopener noreferrer">
                   View
                 </a>
               </td>
@@ -179,7 +145,7 @@ const ServiceTable = () => {
       </table>
 
       {/* Modal */}
-      {currentService && (
+      {showModal && (
         <div className="modal">
           <div className="modal-content">
             <div className="modal-header">
@@ -239,4 +205,5 @@ const ServiceTable = () => {
     </div>
   );
 };
+
 export default ServiceTable;

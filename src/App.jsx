@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
-  });
+  }, []);
 
   const fetchProducts = async () => {
     try {
