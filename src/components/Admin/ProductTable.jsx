@@ -1,3 +1,4 @@
+// src/components/ProductTable.js
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./ProductTable.css"; // Importing the CSS file
@@ -13,7 +14,7 @@ const ProductTable = () => {
 
   const fetchProducts = async () => {
     try {
-      var url = apiUrl + "/admins/product";
+      const url = `${apiUrl}/admins/product`;
       const response = await axios.get(url);
       setProducts(response.data);
     } catch (error) {
@@ -35,13 +36,12 @@ const ProductTable = () => {
 
     for (let i = 0; i < editingProduct.media.length; i++) {
       if (typeof editingProduct.media[i] === "object") {
-        // new files are of type File
         formData.append("media", editingProduct.media[i]);
       }
     }
 
     try {
-      var url = apiUrl + `/admins/products/${id}`;
+      const url = `${apiUrl}/admins/product/${id}`;
       await axios.put(url, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -56,11 +56,11 @@ const ProductTable = () => {
 
   const handleDelete = async (id) => {
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this service?"
+      "Are you sure you want to delete this product?"
     );
     if (userConfirmed) {
       try {
-        var url = apiUrl + `/admins/product/${id}`;
+        const url = `${apiUrl}/admins/product/${id}`;
         await axios.delete(url);
         fetchProducts();
       } catch (error) {

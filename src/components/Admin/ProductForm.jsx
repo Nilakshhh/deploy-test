@@ -26,13 +26,16 @@ const ProductForm = () => {
     }
 
     try {
-      var url = apiUrl + "/admins/product";
+      const url = `${apiUrl}/admins/product`;
       await axios.post(url, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      setMedia([]);
+      setTitle(""); // Clear the title
+      setDescription(""); // Clear the description
+      setCost(""); // Clear the cost
+      setMedia([]); // Clear the media
       alert("Product submitted successfully!");
     } catch (error) {
       if (
