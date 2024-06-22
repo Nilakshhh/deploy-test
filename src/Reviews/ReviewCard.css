@@ -15,17 +15,18 @@
 
 .card-container {
   background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 8px 8px 16px rgba(31, 38, 135, 0.37); 
   backdrop-filter: blur(10px);
   border-radius: 12px;
   width: 50%;
   display: inline-block;
-  transition: width 0.3s ease; /* Add transition for smoother resizing */
+  transition: width 0.3s ease;
   overflow: hidden;
+  margin-bottom: 20px; 
 }
 
 .card-content {
-  background-color: #fff; /* Set your desired background color */
+  background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -37,6 +38,6 @@
 
 @media (max-width: 600px) {
   .card-container {
-    width: 100%; /* Set width to 100% for smaller screens */
+    width: 100%;
   }
 }

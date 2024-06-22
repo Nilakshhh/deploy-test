@@ -1,3 +1,4 @@
+import React from "react";
 import "./About.css";
 
 const timings = [
@@ -17,8 +18,7 @@ function About() {
       <div className="timings-container">
         {timings.map(({ Day, Timing }) => (
           <p key={Day} className="timing-item">
-            <span className="day">{Day}</span> |{" "}
-            <span className="timing">{Timing}</span>
+            <span className="day">{Day}</span> | <span className="timing">{Timing}</span>
           </p>
         ))}
       </div>
@@ -26,13 +26,13 @@ function About() {
         <iframe
           width="100%"
           height="400"
-          frameborder="0"
+          frameBorder="0"
           scrolling="no"
-          marginheight="0"
-          marginwidth="0"
+          marginHeight="0"
+          marginWidth="0"
           src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1910%20G%20Street,%20NW%20(Between%2019th%20&amp;%2020th%20Sts)%20Washington,%20DC%2020006+(Tresses%20Salon)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          title="Google Map"
         >
-          <a href="https://www.gps.ie/">gps systems</a>
         </iframe>
       </div>
     </div>
