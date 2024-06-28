@@ -1,4 +1,3 @@
-// src/ServiceTable.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ServiceTable.css"; // Import CSS file for styling
@@ -13,6 +12,7 @@ const ServiceTable = () => {
     description: "",
     cost: "",
     link: "",
+    and_up: false,
   });
 
   useEffect(() => {
@@ -36,6 +36,7 @@ const ServiceTable = () => {
       description: serviceToEdit.description,
       cost: serviceToEdit.cost,
       link: serviceToEdit.link,
+      and_up: serviceToEdit.and_up,
     });
     setShowModal(true);
   };
@@ -85,10 +86,10 @@ const ServiceTable = () => {
   };
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
     setEditedService((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -98,10 +99,11 @@ const ServiceTable = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Description</th>
             <th>Title</th>
+            <th>Description</th>
             <th>Cost</th>
             <th>Link</th>
+            <th>And Up</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -111,11 +113,11 @@ const ServiceTable = () => {
               <td className="border px-4 py-2" data-label="ID">
                 {service._id}
               </td>
-              <td className="border px-4 py-2" data-label="Description">
-                {service.description}
-              </td>
               <td className="border px-4 py-2" data-label="Title">
                 {service.title}
+              </td>
+              <td className="border px-4 py-2" data-label="Description">
+                {service.description}
               </td>
               <td className="border px-4 py-2" data-label="Cost">
                 {service.cost}
@@ -124,6 +126,9 @@ const ServiceTable = () => {
                 <a href={service.link} target="_blank" rel="noopener noreferrer">
                   View
                 </a>
+              </td>
+              <td className="border px-4 py-2" data-label="And Up">
+                {service.and_up ? "Yes" : "No"}
               </td>
               <td className="border px-4 py-2">
                 <button
@@ -177,7 +182,7 @@ const ServiceTable = () => {
                 <div className="input-group">
                   <label>Cost</label>
                   <input
-                    type="text"
+                    type="number"
                     name="cost"
                     value={editedService.cost}
                     onChange={handleInputChange}
@@ -189,6 +194,15 @@ const ServiceTable = () => {
                     type="text"
                     name="link"
                     value={editedService.link}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="input-group">
+                  <label>And Up</label>
+                  <input
+                    type="checkbox"
+                    name="and_up"
+                    checked={editedService.and_up}
                     onChange={handleInputChange}
                   />
                 </div>

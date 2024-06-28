@@ -10,7 +10,7 @@ function ServiceCard({ title, services }) {
             <div className="service-content">
               <p className="service-description">{service.description}:</p>
               <a href={service.link} className="book-button">
-                ${service.cost}
+                ${service.cost}{service.and_up ? " and up" : ""}
               </a>
             </div>
           </li>

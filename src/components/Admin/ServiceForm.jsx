@@ -12,6 +12,7 @@ const serviceSchema = z.object({
   serviceDescription: z.string().min(3).max(200),
   serviceCost: z.number().min(0),
   serviceLink: z.string().min(10).max(500),
+  and_up: z.boolean(),
 });
 
 function ServiceForm() {
@@ -20,6 +21,7 @@ function ServiceForm() {
   const [serviceDescription, setServiceDescription] = useState("");
   const [serviceCost, setServiceCost] = useState("");
   const [serviceLink, setServiceLink] = useState("");
+  const [andUp, setAndUp] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (event) => {
@@ -31,18 +33,21 @@ function ServiceForm() {
         serviceDescription,
         serviceCost,
         serviceLink,
+        and_up: andUp,
       });
       // If validation succeeds, handle form submission (e.g., send data to backend)
       console.log("Service Title:", serviceTitle);
       console.log("Service Description:", serviceDescription);
       console.log("Service Cost:", serviceCost);
       console.log("Service Link:", serviceLink);
+      console.log("And Up:", andUp);
       var url = apiUrl + "/admins/service";
       await axios.post(url, {
         title: serviceTitle,
         description: serviceDescription,
         cost: serviceCost,
         link: serviceLink,
+        and_up: andUp,
       });
 
       // Reset form fields
@@ -50,6 +55,7 @@ function ServiceForm() {
       setServiceDescription("");
       setServiceCost("");
       setServiceLink("");
+      setAndUp(false);
       // Clear any previous validation errors
       setErrors({});
       alert("Service added!");
@@ -128,6 +134,20 @@ function ServiceForm() {
               {errors.serviceLink && (
                 <span className="text-red-500 text-sm">
                   {errors.serviceLink}
+                </span>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="andUp">And Up:</Label>
+              <input
+                id="andUp"
+                type="checkbox"
+                checked={andUp}
+                onChange={(e) => setAndUp(e.target.checked)}
+              />
+              {errors.and_up && (
+                <span className="text-red-500 text-sm">
+                  {errors.and_up}
                 </span>
               )}
             </div>
