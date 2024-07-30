@@ -59,7 +59,7 @@ const NotesTable = () => {
   };
 
   return (
-    <div className="notes-container">
+    <div className="notes-container mx-10p">
       <table className="notes-table">
         <thead>
           <tr>
@@ -83,7 +83,7 @@ const NotesTable = () => {
               </td>
               <td className="border px-4 py-2">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 btn btn-publish rounded"
                   onClick={() => handleEdit(note._id)}
                 >
                   Edit
@@ -93,6 +93,34 @@ const NotesTable = () => {
           ))}
         </tbody>
       </table>
+      {/* <table className="review-table">
+      <tbody>
+              {pendingReviews.map((review) => (
+                <tr key={review._id}>
+                  <td data-label="Review ID">{review._id}</td>
+                  <td data-label="Rating">{review.rating}</td>
+                  <td data-label="Description">{review.reviewDescription}</td>
+                  <td data-label="Title">{review.title}</td>
+                  <td data-label="Action">
+                    <button
+                      className="btn btn-publish"
+                      onClick={() =>
+                        updateReviewStatus(review._id, "published")
+                      }
+                    >
+                      Publish
+                    </button>
+                    <button
+                      className="btn btn-delete"
+                      onClick={() => deleteReview(review._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+      </table> */}
 
       {/* Modal */}
       {showModal && currentNote && (

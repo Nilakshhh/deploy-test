@@ -99,6 +99,76 @@ body {
   background-color: #e67e22;
 }
 
+.notes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.notes-table th,
+.notes-table td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: left; /* Ensure left alignment */
+  word-wrap: break-word; /* Ensure content wraps */
+}
+
+.notes-table th {
+  background-color: #34495e;
+  color: #fff;
+  font-weight: 600;
+}
+
+.notes-table td {
+  background-color: #f9f9f9;
+}
+
+
+@media (max-width: 700px) {
+  .notes-table,
+  .notes-table thead,
+  .notes-table tbody,
+  .notes-table th,
+  .notes-table td,
+  .notes-table tr {
+    display: block;
+  }
+
+  .notes-table thead tr {
+    display: none;
+  }
+
+  .notes-table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .notes-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .notes-table td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.mx-10p{
+  margin: 0 10%;
+}
+
 @media (max-width: 700px) {
   .review-table,
   .review-table thead,
