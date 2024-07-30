@@ -5,6 +5,7 @@ import "./ServiceTable.css"; // Import CSS file for styling
 const ServiceTable = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [services, setServices] = useState([]);
+  const [uniqueTitles, setUniqueTitles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [editedService, setEditedService] = useState({
@@ -14,6 +15,7 @@ const ServiceTable = () => {
     link: "",
     and_up: false,
   });
+  const [newTitle, setNewTitle] = useState(""); // State for new title input
 
   useEffect(() => {
     fetchServices();
@@ -22,7 +24,12 @@ const ServiceTable = () => {
   const fetchServices = async () => {
     try {
       const response = await axios.get(`${apiUrl}/admins/service`);
-      setServices(response.data);
+      const fetchedServices = response.data;
+      setServices(fetchedServices);
+
+      // Extract unique service titles
+      const titles = [...new Set(fetchedServices.map(service => service.title.trim()))];
+      setUniqueTitles(titles);
     } catch (error) {
       console.error("There was an error fetching the services!", error);
     }
@@ -44,15 +51,27 @@ const ServiceTable = () => {
   const closeModal = () => {
     setCurrentService(null);
     setShowModal(false);
+    setNewTitle(""); // Reset new title input when closing modal
   };
 
   const updateService = async (event) => {
     event.preventDefault(); // Prevent form submission
     try {
+      // Determine if new title should be added
+      let finalTitle = editedService.title;
+      if (newTitle.trim()) {
+        finalTitle = newTitle.trim();
+        if (!uniqueTitles.includes(finalTitle)) {
+          setUniqueTitles([...uniqueTitles, finalTitle]);
+        }
+      }
+
       const response = await axios.put(`${apiUrl}/admins/service`, {
         id: currentService._id,
+        title: finalTitle,
         ...editedService,
       });
+
       console.log("Service updated successfully:", response.data);
       setServices((prevServices) =>
         prevServices.map((service) =>
@@ -91,6 +110,25 @@ const ServiceTable = () => {
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
     }));
+  };
+
+  const handleTitleChange = (event) => {
+    const selectedTitle = event.target.value;
+    setEditedService((prevState) => ({
+      ...prevState,
+      title: selectedTitle,
+    }));
+    setNewTitle(""); // Clear new title input when selecting from dropdown
+  };
+
+  const handleNewTitleChange = (event) => {
+    setNewTitle(event.target.value);
+    if (editedService.title === newTitle) {
+      setEditedService((prevState) => ({
+        ...prevState,
+        title: "",
+      }));
+    }
   };
 
   return (
@@ -163,12 +201,26 @@ const ServiceTable = () => {
               <div className="modal-body">
                 <div className="input-group">
                   <label>Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    value={editedService.title}
-                    onChange={handleInputChange}
-                  />
+                  <div className="flex space-x-2">
+                    <select
+                      name="title"
+                      value={editedService.title}
+                      onChange={handleTitleChange}
+                    >
+                      <option value="">Select a Title</option>
+                      {uniqueTitles.map((title, index) => (
+                        <option key={index} value={title}>
+                          {title}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="text"
+                      placeholder="Add new Title"
+                      value={newTitle}
+                      onChange={handleNewTitleChange}
+                    />
+                  </div>
                 </div>
                 <div className="input-group">
                   <label>Description</label>

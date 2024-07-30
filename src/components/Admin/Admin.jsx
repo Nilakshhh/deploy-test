@@ -6,6 +6,7 @@ import AdminService from "./AdminService";
 import AdminProduct from "./AdminProduct";
 import AdminReview from "./AdminReview";
 import AdminMember from "./AdminMember";
+import AdminNote from "./AdminNote";
 
 function Admin() {
   const navigateTo = useNavigate();
@@ -43,6 +44,8 @@ function Admin() {
         return <AdminProduct />;
       case "tab4":
         return <AdminReview />;
+      case "tab5":
+        return <AdminNote />
       default:
         return <>hello</>;
     }
@@ -69,6 +72,12 @@ function Admin() {
             onClick={() => setActiveTab("tab4")}
           >
             Reviews
+          </button>
+          <button
+            className={activeTab === "tab5" ? "active" : ""}
+            onClick={() => setActiveTab("tab5")}
+          >
+            Notes
           </button>
         </div>
         <div className="tab-content">{renderTabContent()}</div>
