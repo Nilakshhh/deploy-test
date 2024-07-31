@@ -9,32 +9,51 @@ import { z } from "zod";
 const memberSchema = z.object({
   memberName: z.string().min(3).max(50),
   memberDescription: z.string().min(10).max(200),
-  memberImage: z.string().url().optional(), // Assuming the member image is a URL
+  memberImage: z.instanceof(File).optional(), // Handling image as a file
 });
 
 function MemberForm() {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [memberName, setMemberName] = useState("");
   const [memberDescription, setMemberDescription] = useState("");
-  const [memberImage, setMemberImage] = useState("");
+  const [memberImage, setMemberImage] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Validate form data
     try {
       memberSchema.parse({ memberName, memberDescription, memberImage });
-      // If validation succeeds, handle form submission (e.g., send data to backend)
-      console.log("Member Name:", memberName);
-      console.log("Member Description:", memberDescription);
-      console.log("Member Image:", memberImage);
+      
+      // If validation succeeds, handle form submission
+      const formData = new FormData();
+      formData.append("name", memberName);
+      formData.append("description", memberDescription);
+      if (memberImage) {
+        formData.append("photo", memberImage);
+      }
+
+      // Send data to backend
+      const url = `${apiUrl}/admins/team`
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add team member");
+      }
+
+      const result = await response.json();
+      console.log("Success:", result);
+
       // Reset form fields
       setMemberName("");
       setMemberDescription("");
-      setMemberImage("");
-      // Clear any previous validation errors
+      setMemberImage(null);
       setErrors({});
     } catch (error) {
-      // If validation fails, set error state to display validation errors
+      // If validation or submission fails, set error state to display validation errors
       if (error instanceof z.ZodError) {
         const fieldErrors = {};
         error.errors.forEach((err) => {
@@ -42,6 +61,8 @@ function MemberForm() {
           fieldErrors[fieldName] = err.message;
         });
         setErrors(fieldErrors);
+      } else {
+        console.error("Error submitting form:", error);
       }
     }
   };
@@ -86,9 +107,9 @@ function MemberForm() {
               <Label htmlFor="memberImage">Member Image:</Label>
               <Input
                 id="memberImage"
-                type="text"
-                value={memberImage}
-                onChange={(e) => setMemberImage(e.target.value)}
+                type="file"
+                accept="image/*"
+                onChange={(e) => setMemberImage(e.target.files[0])}
               />
               {errors.memberImage && (
                 <span className="text-red-500 text-sm">

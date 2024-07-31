@@ -11,7 +11,7 @@ function Notes({ notes }) {
         if (targetElement && note.text.trim()) {
           const noteContainer = document.createElement("div");
           noteContainer.className = "note-container";
-          noteContainer.innerHTML = `<p class="note-text">${note.text}</p>`;
+          noteContainer.innerHTML = `<p class="note-text"><span class="note-label">Note: </span>${note.text}</p>`;
 
           targetElement.parentNode.insertBefore(noteContainer, targetElement);
           noteContainers.push(noteContainer);

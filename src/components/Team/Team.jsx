@@ -1,31 +1,46 @@
-import "./Team.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Member from "./Member";
+import "./Team.css";
 
 function Team() {
+  const [members, setMembers] = useState([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/admins/team`);
+        setMembers(response.data);
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      }
+    };
+
+    fetchMembers();
+  }, [apiUrl]);
+
+  // Debugging: Log the members data
+  console.log(members);
+
   return (
     <div className="team-container" id="team">
       <h2 className="section-title">Our Team</h2>
       <div className="members-grid">
-        <Member
-          imageSrc="photos/Claudia.webp"
-          name="Claudia Gandarillas"
-          description="Claudia is doing hair for 25 years"
-        />
-        <Member
-          imageSrc="photos/Joao.webp"
-          name="Joao Souza"
-          description="Hair Designer and Master Colorist"
-        />
-        <Member
-          imageSrc="photos/Rosaline.webp"
-          name="Rosaline Chow"
-          description="Hair design and Color specialist"
-        />
-        <Member
-          imageSrc="photos/Gio.webp"
-          name="Gio"
-          description="Hair design and colorist for about 25 years in Colombia and Brazil"
-        />
+        {members.map((member) => {
+          // Ensure imageSrc has a leading slash if necessary
+          const imageUrl = `${apiUrl}/${member.photo}`.replace(/\\/g, '/');
+          console.log(imageUrl); // Debugging URL
+
+          return (
+            <Member
+              key={member._id}
+              imageSrc={imageUrl}
+              name={member.name}
+              description={member.description}
+            />
+          );
+        })}
       </div>
     </div>
   );

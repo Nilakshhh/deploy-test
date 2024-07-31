@@ -2,6 +2,8 @@
 import "./Member.css";
 
 function Member({ imageSrc, name, description }) {
+  console.log(imageSrc)
+  console.log("gg")
   return (
     <li className="member-card">
       <div className="member-photo-container">

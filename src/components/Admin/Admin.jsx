@@ -32,7 +32,7 @@ function Admin() {
     return null;
   };
 
-  const [activeTab, setActiveTab] = useState("tab2");
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -55,6 +55,12 @@ function Admin() {
     <>
       <div className="AdminTabs">
         <div className="tabs">
+        <button
+            className={activeTab === "tab1" ? "active" : ""}
+            onClick={() => setActiveTab("tab1")}
+          >
+            Team
+          </button>
           <button
             className={activeTab === "tab2" ? "active" : ""}
             onClick={() => setActiveTab("tab2")}
