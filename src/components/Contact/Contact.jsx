@@ -17,22 +17,32 @@ function Contact() {
             </p>
           </div>
           <div className="contact-form">
-            <div className="space-y-4">
-              <div className="form-group">
-                <Input id="name" placeholder="Enter your name" type="text" />
+            <form
+              action="mailto:your-email@example.com"
+              method="post"
+              encType="text/plain"
+            >
+              <div className="space-y-4">
+                <div className="form-group">
+                  <Input id="name" placeholder="Enter your name" type="text" name="name" />
+                </div>
+                <div className="form-group">
+                  <Input id="email" placeholder="Enter your email" type="email" name="email" />
+                </div>
+                <div className="form-group">
+                  <Input id="phone" placeholder="Enter your contact number" type="tel" name="phone" />
+                </div>
+                <div className="form-group">
+                  <Textarea
+                    className="min-h-[100px]"
+                    id="message"
+                    placeholder="Enter your message"
+                    name="message"
+                  />
+                </div>
+                <button className="btn-contact" type="submit">Submit</button>
               </div>
-              <div className="form-group">
-                <Input id="email" placeholder="Enter your email" type="email" />
-              </div>
-              <div className="form-group">
-                <Textarea
-                  className="min-h-[100px]"
-                  id="message"
-                  placeholder="Enter your message"
-                />
-              </div>
-              <button className="btn-contact">Submit</button>
-            </div>
+            </form>
             <div className="recaptcha-terms">
               This form is protected by reCAPTCHA and the Google{" "}
               <a
