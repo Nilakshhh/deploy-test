@@ -1,7 +1,10 @@
+import React from "react";
 import "./Contact.css";
 import { CardContent } from "@/components/ui/card";
 import { Textarea } from "../ui/textarea";
 import { Input } from "../ui/input";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 function Contact() {
   return (
@@ -15,6 +18,25 @@ function Contact() {
               bit more info below and we'll get back to you within our next
               business day. Thanks!
             </p>
+            <p><b>Phone:</b> (202) 842-9240</p>
+            <div className="social-icons">
+              <a
+                href="https://www.instagram.com/tressessalondc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+              >
+                <InstagramIcon fontSize="large" />
+              </a>
+              <a
+                href="https://www.facebook.com/TressesSalonDC/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+              >
+                <FacebookIcon fontSize="large" />
+              </a>
+            </div>
           </div>
           <div className="contact-form">
             <form

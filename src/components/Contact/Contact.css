@@ -49,6 +49,22 @@
   }
 }
 
+.social-icons {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  color: #3f2f2f;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #616161;
+}
+
 .contact-info {
   flex: 1;
   margin-right: 20px;
